@@ -34,7 +34,7 @@ The ViewCaptureToFile command saves an image of the current view to a file.
 ---  
 
 
-### -ViewCaptureToFile  
+### rs.Command("-ViewCaptureToFile")  
 
 
 適当に GitHub で探すとなんかあった。  
