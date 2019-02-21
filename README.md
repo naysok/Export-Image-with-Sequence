@@ -6,9 +6,23 @@ Image Format
 JPG, PNG, TIF etc...  
 
 
+---
+
+
+### Capture Rhino Objects
+
 ![photo](Test/Capture.jpg)  
 ↓  
-![photo](Test/hoge.png)  
+![photo](Test/rhino-wireframe.png)  
+![photo](Test/rhino-technical.png)  
+![photo](Test/rhino-ghost.png)  
+ライノのオブジェクトの描画は、ビューポートの設定に依存する  
+
+
+### Capture Grasshopper Objects  
+![photo](Test/gh-object.png)  
+CustomPreview にColourPicker で渡すと、一番左。ほとんど見えない。  
+マテリアルかな
 
 
 ---  
