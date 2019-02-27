@@ -11,70 +11,62 @@ JPG, PNG, TIF etc...
 ---
 
 
-### Capture Rhino Objects
+### Capture Result  
 
-![photo](Test/Capture.jpg)  
-↓  
-![photo](Test/rhino-wireframe.png)  
-![photo](Test/rhino-technical.png)  
-![photo](Test/rhino-ghost.png)  
-ライノのオブジェクトの描画は、ビューポートの設定に依存する  
+- Capture Rhino Objects
 
-
-### Capture Grasshopper Objects  
-![photo](Test/gh-object.png)  
-CustomPreview にColourPicker で渡すと、一番左。ほとんど見えない。  
-マテリアルかな  
-
-gh オブジェクトのリストから、Python コンポーネントの次で ListItem で選び出したり、  
-Python コンポーネント内で選び出しても、描画に反映されないように見えた。  
-リストから選んで、一度 Bake、ViewCaptureToFile、Delete を Python で連番処理するのでできた。  
-
-たぶんこんな感じ  
-
-```Python
-"""
-
-1. Select Curve with FrameCount
-2. Bake Curve
-3. rs.Command("-ViewCaptureToFile")
-4. rs.Command("_SelAll _Delete")
-
-"""
-import Rhino
-import rhinoscriptsyntax as rs
-import scriptcontext as sc
-import ghpythonlib.components as ghpc
+  ![photo](Test/Capture.jpg)  
+  ↓  
+  ![photo](Test/rhino-wireframe.png)  
+  ![photo](Test/rhino-technical.png)  
+  ![photo](Test/rhino-ghost.png)  
+  ライノのオブジェクトの描画は、ビューポートの設定に依存する  
 
 
-sc.doc = ghdoc
+- Capture Grasshopper Objects  
+  ![photo](Test/gh-object.png)  
+  CustomPreview にColourPicker で渡すと、一番左。ほとんど見えない。  
+  マテリアルかな。  
+
+  gh で、アニメーションをさせようとする。gh オブジェクトのリストを作る。  
+
+  Python コンポーネントの次で ListItem で選び出したり、Python コンポーネント内で選び出しても、描画に反映されないように見えた。  
+
+  リストから選んで、一度 Bake、ViewCaptureToFile、Delete を Python で連番処理するのでできた。  
+
+  たぶんこんな感じ  
 
 
-if toggle:
+  ```Python
+  import Rhino
+  import rhinoscriptsyntax as rs
+  import scriptcontext as sc
+  import ghpythonlib.components as ghpc
 
-    sc.doc = Rhino.RhinoDoc.ActiveDoc
+  sc.doc = ghdoc
 
-    for i in xrange(count):
+  if toggle:
 
-        curve = ghpc.ListItem(crvs, i)
-#        print(curve)
-        sc.doc.Objects.AddCurve(curve)
+      sc.doc = Rhino.RhinoDoc.ActiveDoc
 
-        name_format = "%03d"%i
-        export_name = path + str(name_format) + type
+      for i in xrange(count):
 
+          curve = ghpc.ListItem(crvs, i)
+          sc.doc.Objects.AddCurve(curve)
 
-        query = "-ViewCaptureToFile "+ \
-            export_name + \
-           " W=1080 H=1080 S=1 D=_No R=_No A=_No T=_Yes " + \
-           " _Enter " + \
-           " _SelAll _Delete"
+          name_format = "%03d"%i
+          export_name = path + str(name_format) + type
 
+          query = "-ViewCaptureToFile "+ \
+              export_name + \
+             " W=1080 H=1080 S=1 D=_No R=_No A=_No T=_Yes " + \
+             " _Enter " + \
+             " _SelAll _Delete"
 
-        rs.Command(query)
+          rs.Command(query)
+  ```
 
-        #print(query)
-```
+  パフォーマンス落ちるけど、ghpythonlib.components めっちゃ便利...  
 
 
 
