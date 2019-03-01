@@ -6,7 +6,9 @@ Image Format
 JPG, PNG, TIF etc...  
 
 Python コンポーネント内のループで、連番の書き出しを行うので、ジオメトリの処理もそのループ内で作る必要がある。  
-そのときに、プレビュー状態では、ジオメトリがキャプチャされなかったので、" GeometryOperation --> Bake --> Capture --> Delete " を、すべて Python で書いてループさせている。  
+
+そのときに、プレビュー状態では、ジオメトリがキャプチャされなかったので、" [GeometryOperation] --> Bake --> Capture --> Delete " を、すべて Python で書いてループさせている。  
+
 
 カメラの属性、マテリアルの属性にうまくアクセスできれば（物理的には余裕で出来るので、きちんと実装できれば）、プリレンダーツールとして Rhino を運用できる。  
 
@@ -33,9 +35,7 @@ Python コンポーネント内のループで、連番の書き出しを行う�
 
   gh で、アニメーションをさせようとする。gh オブジェクトのリストを作る。  
 
-  Python コンポーネントの次で ListItem で選び出したり、Python コンポーネント内で選び出しても、描画に反映されないように見えた。  
-
-  リストから選んで、一度 Bake、ViewCaptureToFile、Delete を Python で連番処理するのでできた。  
+  Bake --> ViewCaptureToFile --> Delete を Python で連番処理するのでできた。  
 
   たぶんこんな感じ  
 
